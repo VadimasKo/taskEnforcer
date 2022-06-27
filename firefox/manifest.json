@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "TaskEnforcer",
+    "version": "1.0",
+  
+    "description": "Makes sure your tasks are completed",
+  
+    "icons": {
+      "48": "icons/border-48.png"
+    },
+  
+    "content_scripts": [
+      {
+        "matches": ["*://*.mozilla.org/*"],
+        "js": ["main.js"]
+      }
+    ]
+  }
+  
