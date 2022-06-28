@@ -1,19 +1,26 @@
 {
-    "manifest_version": 2,
-    "name": "TaskEnforcer",
-    "version": "1.0",
-  
-    "description": "Makes sure your tasks are completed",
-  
-    "icons": {
-      "48": "icons/border-48.png"
-    },
-  
-    "content_scripts": [
-      {
-        "matches": ["*://*.mozilla.org/*"],
-        "js": ["main.js"]
-      }
-    ]
+  "manifest_version": 2,
+  "name": "TaskEnforcer",
+  "version": "1.0",
+
+  "description": "Makes sure your tasks are completed",
+  "homepage": "https://github.com/VadimasKo/taskEnforcer",
+
+  "permissions": ["activeTab","webRequest", "webRequestBlocking", "<all_urls>" ],
+
+  "icons": {
+    "48": "icons/border-48.png"
+  },
+
+  "browser_action": {
+    "default_icon": "icons/border-48.png",
+    "default_title": "TaskEnforcer",
+    "default_popup": "popup/popup.html"
+  },
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
   }
+}
   
