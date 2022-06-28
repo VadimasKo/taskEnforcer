@@ -1,5 +1,8 @@
-const listener = (details) => {
-  return { cancel: true }
+const listener = async (details) => {
+  const isBlocked = await checkBlock()
+  if (isBlocked) {
+    return { cancel: true }
+  }
 }
 
 browser.webRequest.onBeforeRequest.addListener(listener,
@@ -14,3 +17,9 @@ browser.webRequest.onBeforeRequest.addListener(listener,
   ] },
   ["blocking"]
 )
+
+const checkBlock = async  () => {
+  const isBlocked =await browser.storage.sync.get('isBlocked')
+  console.log(isBlocked)
+  return isBlocked
+}

@@ -19,7 +19,7 @@ Extension settings include:
 
 ### Firefox 
  - [x] Implement website blocking / redirect
- - [ ] Block based on condition
+ - [x] Block based on condition
  - [ ] Store config using Storage API
  - [ ] Create Settings page
  - [ ] Create redirect page
@@ -36,3 +36,6 @@ Extension settings include:
 - install web-ext tool  `npm install --global web-ext`
 - Move into firefox root directory `cd firefox`
 - To test extension run `web-ext run`
+
+### <ins> To inspect extension </ins>
+- go to `about:debugging` ➞ `This Firefox` ➞ `Extension ➞ Inspect`

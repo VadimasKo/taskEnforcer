@@ -6,7 +6,13 @@
   "description": "Makes sure your tasks are completed",
   "homepage": "https://github.com/VadimasKo/taskEnforcer",
 
-  "permissions": ["activeTab","webRequest", "webRequestBlocking", "<all_urls>" ],
+  "permissions": [
+    "activeTab",
+    "webRequest", 
+    "webRequestBlocking",
+    "<all_urls>",
+    "storage"
+  ],
 
   "icons": {
     "48": "icons/border-48.png"
@@ -18,9 +24,24 @@
     "default_popup": "popup/popup.html"
   },
 
+  "options_ui": {
+    "page": "options/options.html"
+  },
+
   "background": {
     "scripts": ["background.js"],
     "persistent": false
+  },
+
+  "web_accesible_resources": [
+    "options/options.html"
+  ],
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "taskEnforcer@example.com",
+      "strict_min_version": "48.0"
+    }
   }
-}
   
+}
