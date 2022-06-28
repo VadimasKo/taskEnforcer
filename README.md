@@ -18,15 +18,17 @@ Extension settings include:
 ## Development roadmap :golf: <a name='2'></a>
 
 ### Firefox 
- - [ ] Implement website blocking / redirect
- - [ ] Block based on countdown
+ - [x] Implement website blocking / redirect
+ - [ ] Block based on condition
+ - [ ] Store config using Storage API
+ - [ ] Create Settings page
  - [ ] Create redirect page
  - [ ] Create notifications
- - [ ] Create Settings page
  - [ ] Complete Readme
 
 ### Chrome
-- [ ] Copy paste firefox extension!? O_O
+- [ ] Copy firefox extension
+- [ ] Translate manifest v2 -> v3
 
 ## Running and Debuging 🛠️ <a name="3"></a>
 
@@ -34,4 +36,3 @@ Extension settings include:
 - install web-ext tool  `npm install --global web-ext`
 - Move into firefox root directory `cd firefox`
 - To test extension run `web-ext run`
-
