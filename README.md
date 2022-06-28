@@ -20,8 +20,12 @@ Extension settings include:
 ### Firefox 
  - [x] Implement website blocking / redirect
  - [x] Block based on condition
- - [ ] Store config using Storage API
  - [ ] Create Settings page
+    - [x] create Task Table 
+    - [ ] create Task  CRUD
+    - [ ] create blockable website edit window
+    - [ ] make it pretty?
+ - [ ] Store config using Storage API
  - [ ] Create redirect page
  - [ ] Create notifications
  - [ ] Complete Readme
