@@ -22,10 +22,10 @@ Extension settings include:
  - [x] Block based on condition
  - [ ] Create Settings page
     - [x] create Task Table 
-    - [ ] create Task  CRUD
+    - [x] Store config using Storage API
+    - [x] create Task  CRUD
     - [ ] create blockable website edit window
     - [ ] make it pretty?
- - [ ] Store config using Storage API
  - [ ] Create redirect page
  - [ ] Create notifications
  - [ ] Complete Readme
