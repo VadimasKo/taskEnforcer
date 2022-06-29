@@ -2,8 +2,14 @@
 let blockList
 const setBlockList = async () => {
   const buffer = await browser.storage.sync.get('blockList')
-  blockList = buffer.blockList
-  setOnBeforeListener()
+  if (!buffer.blockList) {
+    // onInstall && onStartup listeners/event are not working
+    await browser.storage.sync.set({'blockList': defaultList })
+    setBlockList()
+  } else {
+    blockList = buffer.blockList
+    setOnBeforeListener()
+  }
 }
 setBlockList()
 
@@ -19,10 +25,22 @@ const setOnBeforeListener = () => {
   )
 }
 
+//listen for config changes and updateQ
+// WHY ARE YOU NOT RUNNING!!! 
+// https://www.youtube.com/watch?v=dv0k5J9YDuM
+// browser.storage.onChanged.addListener(changes => {
+//   console(changes, 'onChanged')
+//   blockList = changes.blockList.newValue
+//   onBeforeRequest.removeListener(onBeforeListener)
+//   setOnBeforeListener()
+// })
 
-//listen for config changes and update
-browser.storage.onChanged.addListener(changes => {
-  blockList = changes.blockList.newValue
+const bc = new BroadcastChannel('taskEnforcer');
+
+bc.onmessage = async event => {
+  console.log(event.data)
+  const buffer = await browser.storage.sync.get('blockList')
+  blockList = buffer.blockList
   onBeforeRequest.removeListener(onBeforeListener)
   setOnBeforeListener()
-})
+}

@@ -10,7 +10,7 @@
   
     <section>
       <table>
-        <caption> Task Table</caption>
+        <caption><h2>Task Table</h2></caption>
         <thead>
           <tr>
             <th scope="col">Task Name</th> <!-- ex Do 20 pushups -->
@@ -49,8 +49,11 @@
   
     <section>
       <h2>Blocklist</h2>
-      <input/>
-      <button id="newWebsite">add new website</button>
+      <ul id="blockList"></ul>
+      <form id="newBlockForm">
+        <input type="text" name='url'/>
+        <button id="submit">add new website</button>
+      </form>
     </section>
 
     <script src="taskTable.js"></script>
