@@ -29,7 +29,7 @@
   },
 
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["initialize.js", "background.js"],
     "persistent": false
   },
 

@@ -20,11 +20,13 @@ Extension settings include:
 ### Firefox 
  - [x] Implement website blocking / redirect
  - [x] Block based on condition
+    - [x] Save blockList config using Storage
  - [ ] Create Settings page
     - [x] create Task Table 
     - [x] Store config using Storage API
     - [x] create Task  CRUD
     - [ ] create blockable website edit window
+    - [ ] Edit Task functionality
     - [ ] make it pretty?
  - [ ] Create redirect page
  - [ ] Create notifications
@@ -42,4 +44,4 @@ Extension settings include:
 - To test extension run `web-ext run`
 
 ### <ins> To inspect extension </ins>
-- go to `about:debugging` ➞ `This Firefox` ➞ `Extension ➞ Inspect`
+- go to `about:debugging` ➞ `This Firefox` ➞ `taskEnforcer` ➞ `Inspect`
