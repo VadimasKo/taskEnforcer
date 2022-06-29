@@ -25,8 +25,8 @@ Extension settings include:
     - [x] create Task Table 
     - [x] Store config using Storage API
     - [x] create Task  CRUD
-    - [ ] create blockable website edit window
-    - [ ] Edit Task functionality
+    - [x] create blockable website edit window
+    - [ ] task edit button enable + functionality
     - [ ] make it pretty?
  - [ ] Create redirect page
  - [ ] Create notifications
