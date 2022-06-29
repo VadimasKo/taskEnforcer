@@ -30,7 +30,9 @@ Extension settings include:
     - [ ] make it pretty?
  - [ ] Create redirect page
  - [ ] Create notifications
+ - [ ] Fix bugs && prepare for Store
  - [ ] Complete Readme
+
 
 ### Chrome
 - [ ] Copy firefox extension
