@@ -75,4 +75,5 @@ const createEditDeleteCell = (index) => {
   return tableCell
 }
 
+
 document.addEventListener('DOMContentLoaded', renderTasks)
