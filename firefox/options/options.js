@@ -1,39 +1,39 @@
-const task = {
-  name: "Do 20 pushups",
-  duration: "20 minutes",
-  perDay: "10",
-  activeTime: ["11:40", "18:00"]
-}
-
-// fix on empty
+//===== Task CRUD update/Edit is missing
 const getTaskList = async () => {
   const storageObj = await browser.storage.sync.get('taskList')
-  const taskList = JSON.parse(storageObj.taskList)
-  return Array.isArray(taskList) ? taskList : []
+  return JSON.parse(storageObj.taskList || '[]')
 }
 
 const setTask = async (task) => {
   const taskList = await getTaskList()
   taskList.push(task)
-  browser.storage.sync.set({ taskList: JSON.stringify(taskList) })
-}
-
-const addTask = async () => {
-  await setTask(task)
-  rmRenderedTasks()
-  renderTasks()
+  await browser.storage.sync.set({ taskList: JSON.stringify(taskList) })
 }
 
 const deleteTask = async (index) => {
   const taskList = await getTaskList()
-  const newList = taskList.filter((task, i) => i !== index )
+  const newList = taskList.filter((t, i) => i !== index)
   await browser.storage.sync.set({ taskList: JSON.stringify(newList) })
-  rmRenderedTasks()
-  renderTasks()
+  renderTasks(true)
 }
 
+//===== HandleForm
+const form = document.getElementById('newTaskForm')
+form.addEventListener('submit', async e => {
+  const data = new FormData(form)
+  const task = {
+    name:     data.get('name'),
+    deadline: data.get('deadline'),
+    duration: data.get('duration'),
+  }
+  await setTask(task)
+  renderTasks(true)
+})
 
-const renderTasks = async () => {
+
+//===== Rendering methods
+const renderTasks = async (isRendered) => {
+
   const taskList = await getTaskList()
   const fragment = new DocumentFragment()
 
@@ -46,24 +46,33 @@ const renderTasks = async () => {
       tableRow.append(tableCell)
     })
 
-    const deleteBtn = document.createElement('button')
-    deleteBtn.id = index
-    deleteBtn.className = 'deleteBtn'
-    deleteBtn.textContent = 'Delete'
-    deleteBtn.onclick = () => deleteTask(index)
-
-    tableRow.append(deleteBtn)
+    tableRow.append(createEditDeleteCell(index))
     fragment.append(tableRow)
   })
 
   const tableBody = document.querySelector("#taskBody")
+  if (isRendered) tableBody.textContent = '' //remove prev render
   tableBody.appendChild(fragment)
 }
 
-const rmRenderedTasks = () => {
-  const tableBody = document.querySelector("#taskBody")
-  tableBody.textContent = ''
+// Is there a shorthand method?
+const createEditDeleteCell = (index) => {
+  const tableCell = document.createElement('td')
+
+  const deleteBtn = document.createElement('button')
+  deleteBtn.id = index
+  deleteBtn.className = 'deleteBtn'
+  deleteBtn.textContent = 'Delete'
+  deleteBtn.onclick = () => deleteTask(index)
+
+  const editBtn = document.createElement('button')
+  editBtn.id = index
+  editBtn.disabled = true
+  editBtn.className = 'editBtn'
+  editBtn.textContent = 'Edit'
+
+  tableCell.append(editBtn, deleteBtn)
+  return tableCell
 }
 
 document.addEventListener('DOMContentLoaded', renderTasks)
-document.getElementById("addNew").addEventListener("click", addTask)
