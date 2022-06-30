@@ -7,6 +7,14 @@ const getTaskList = async () => {
 const setTask = async (task) => {
   const taskList = await getTaskList()
   taskList.push(task)
+
+  taskList.sort((task1, task2) => {
+    const [h1, min1] = task1.deadline.split(':').map(val => parseInt(val))
+    const [h2, min2] = task2.deadline.split(':').map(val => parseInt(val))
+
+    return h1 < h2 || (h1 === h2 && min1 <= min2 ) ? -1 : + 1
+  })
+
   await browser.storage.sync.set({ taskList: JSON.stringify(taskList) })
 }
 
@@ -29,7 +37,6 @@ form.addEventListener('submit', async e => {
   await setTask(task)
   renderTasks(true)
 })
-
 
 //===== Rendering methods
 const renderTasks = async (isRendered) => {

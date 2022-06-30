@@ -26,10 +26,12 @@ Extension settings include:
     - [x] Store config using Storage API
     - [x] create Task  CRUD
     - [x] create blockable website edit window
+    - [ ] Sort tasks by time
     - [ ] task edit button enable + functionality
     - [ ] make it pretty?
- - [ ] Create redirect page
- - [ ] Create notifications
+ - [ ] Create task notification
+ - [ ] Create block notification
+
  - [ ] Fix bugs && prepare for Store
  - [ ] Complete Readme
 
