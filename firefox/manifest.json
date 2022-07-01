@@ -11,7 +11,9 @@
     "webRequest", 
     "webRequestBlocking",
     "<all_urls>",
-    "storage"
+    "storage",
+    "notifications",
+    "alarms"
   ],
 
   "icons": {
@@ -29,7 +31,7 @@
   },
 
   "background": {
-    "scripts": ["initialize.js", "background.js"],
+    "scripts": ["blocking.js", "taskNotifications.js"],
     "persistent": false
   },
 

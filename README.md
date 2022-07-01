@@ -26,19 +26,19 @@ Extension settings include:
     - [x] Store config using Storage API
     - [x] create Task  CRUD
     - [x] create blockable website edit window
-    - [ ] Sort tasks by time
+    - [x] Sort tasks by time and isActive
     - [ ] task edit button enable + functionality
     - [ ] make it pretty?
- - [ ] Create task notification
+ - [x] Create task notification
  - [ ] Create block notification
-
  - [ ] Fix bugs && prepare for Store
  - [ ] Complete Readme
 
 
 ### Chrome
-- [ ] Copy firefox extension
-- [ ] Translate manifest v2 -> v3
+ - [ ] Copy firefox extension
+ - [ ] Translate manifest v2 -> v3
+    - [ ] Convert  background scripts to non-persistent  
 
 ## Running and Debuging 🛠️ <a name="3"></a>
 
