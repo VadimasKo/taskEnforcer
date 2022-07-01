@@ -1,10 +1,10 @@
 # Task Enforcer :ledger: :lock:
 
-| Table Of Contents    su| link       |
-| ---------------------| ---------- |
-| About  🔍             | [here](#1) |
-| Dev roadmap :golf:   | [here](#2) |
-| Running and Debuging | [here](#3) |
+| Table Of Contents       | link       |
+| ------------------------| ---------- |
+| About  🔍               | [here](#1) |
+| Dev roadmap :golf:      | [here](#2) |
+| Running and Debuging 🛠️ | [here](#3) |
 
 ## About 🔍 <a name='1'></a>
 This extension notifies users to do a certain task and while this task is not completed users will have no access to social media and other websites.
