@@ -1,3 +1,13 @@
+const defaultList = [
+  "*://*.facebook.com/*",
+  "*://*.reddit.com/*",
+  "*://*.instagram.com/*",
+  "*://*.youtube.com/*",
+  "*://*.twitter.com/*",
+  "*://*.tiktok.com/*",
+  "*://*.snapchat.com/*",
+]
+
 //initialise blockList
 let blockList
 const setBlockList = async () => {
