@@ -1,7 +1,7 @@
 //===== Task CRUD update/Edit is missing
 const getTaskList = async () => {
   const storageObj = await browser.storage.sync.get('taskList')
-  return JSON.parse(storageObj.taskList || '[]')
+  return JSON.parse(storageObj.taskList  || '[]')
 }
 
 const setTask = async (task) => {
@@ -9,6 +9,9 @@ const setTask = async (task) => {
   taskList.push(task)
 
   taskList.sort((task1, task2) => {
+    if (task1.isActive && !task2.isActive) return -1
+    if (!task1.isActive && task2.isActive) return +1
+
     const [h1, min1] = task1.deadline.split(':').map(val => parseInt(val))
     const [h2, min2] = task2.deadline.split(':').map(val => parseInt(val))
 
@@ -33,6 +36,7 @@ form.addEventListener('submit', async e => {
     name:     data.get('name'),
     deadline: data.get('deadline'),
     duration: data.get('duration'),
+    isActive: true,
   }
   await setTask(task)
   renderTasks(true)
