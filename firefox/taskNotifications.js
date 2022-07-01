@@ -1,5 +1,6 @@
 let isNotificationSet = false
 
+
 const getUnixDeadline = (h, min) => {
   const hoursToUnix = (h) => h * 3600000
   const minToUnix = (min) => min * 60000
@@ -17,23 +18,17 @@ const getUnixDeadline = (h, min) => {
 }
 
 const disableTask = async (index) => {
-  console.log('disable')
   const storageObj = await browser.storage.sync.get('taskList')
   const taskList = JSON.parse(storageObj.taskList)
   const targetTask = taskList[index]
   targetTask.isActive = false
-
-  console.log('targetTask', targetTask)
-
-  const newList = [...taskList.filter((task, i) => i !== index), targetTask]
-
-  console.log('newList', newList)
+  
+  const newList = [...taskList.filter((t, i) => i !== index), targetTask]
   
   await browser.storage.sync.set({ 'taskList': JSON.stringify(newList) })
 }
 
 const setNextTask = async () => {
-  console.log('SETneXT')
   let { taskList } = await browser.storage.sync.get('taskList')
   if (!taskList) {
     await browser.storage.sync.set({ 'taskList': '[]' })
@@ -47,7 +42,6 @@ const setNextTask = async () => {
     const unixDeadline = getUnixDeadline(h, min)
 
     if (unixDeadline <= Date.now()) {
-      console.log('disable')
       await disableTask(0)
       setNextTask()
     } else {
@@ -60,8 +54,8 @@ const setNextTask = async () => {
 
 setNextTask()
 
-browser.alarms.onAlarm.addListener((alarm) => {
-  console.log('ALARM')
+browser.alarms.onAlarm.addListener(async alarm => {
+  await browser.storage.sync.set({'isBlocked': true })
   browser.notifications.create({
     type: 'basic',
     iconUrl: 'icons/border-48.png',

@@ -25,12 +25,15 @@ setBlockList()
 
 //initialise Request listenere
 const onBeforeRequest = browser.webRequest.onBeforeRequest
-const blockCallBack = () => {  return { cancel: true } }
+const blockCallBack = async () => { 
+  const isBlocked = await browser.storage.sync.get('isBlocked').isBlocked
+  return isBlocked ? { cancel: true } : null
+}
 
 const setOnBeforeListener = () => {
   onBeforeRequest.addListener(
     blockCallBack,
-    { urls: blockList?.length ? blockList : [''] },
+    { urls: blockList },
     ["blocking"]
   )
 }
@@ -39,7 +42,6 @@ const setOnBeforeListener = () => {
 const bc = new BroadcastChannel('taskEnforcer');
 
 bc.onmessage = async event => {
-  console.log('update', event.data)
   const buffer = await browser.storage.sync.get('blockList')
   blockList = buffer.blockList
   onBeforeRequest.removeListener(blockCallBack)
