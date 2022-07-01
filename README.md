@@ -2,8 +2,8 @@
 
 | Table Of Contents    su| link       |
 | ---------------------| ---------- |
-| About                | [here](#1) |
-| Dev roadmap          | [here](#2) |
+| About  🔍             | [here](#1) |
+| Dev roadmap :golf:   | [here](#2) |
 | Running and Debuging | [here](#3) |
 
 ## About 🔍 <a name='1'></a>
@@ -21,16 +21,16 @@ Extension settings include:
  - [x] Implement website blocking / redirect
  - [x] Block based on condition
     - [x] Save blockList config using Storage
- - [ ] Create Settings page
+ - [x] Create Settings page
     - [x] create Task Table 
     - [x] Store config using Storage API
     - [x] create Task  CRUD
     - [x] create blockable website edit window
     - [x] Sort tasks by time and isActive
-    - [ ] task edit button enable + functionality
-    - [ ] make it pretty?
  - [x] Create task notification
- - [ ] Create block notification
+ - [x] Create interactive Popup
+ - [x] Create block notification
+ - [ ] make it pretty?
  - [ ] Fix bugs && prepare for Store
  - [ ] Complete Readme
 
