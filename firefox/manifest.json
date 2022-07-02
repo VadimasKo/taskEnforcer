@@ -4,7 +4,7 @@
   "version": "1.0",
 
   "description": "Makes sure your tasks are completed",
-  "homepage": "https://github.com/VadimasKo/taskEnforcer",
+  "homepage_url": "https://github.com/VadimasKo/taskEnforcer",
 
   "permissions": [
     "activeTab",
@@ -31,19 +31,11 @@
   },
 
   "background": {
-    "scripts": ["blocking.js", "taskNotifications.js"],
-    "persistent": false
-  },
-
-  "web_accesible_resources": [
-    "options/options.html"
-  ],
-
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "taskEnforcer@example.com",
-      "strict_min_version": "48.0"
-    }
+    "persistent": false,
+    "scripts": [
+      "common/index.js",
+      "backgroundScripts/blocking.js",
+      "backgroundScripts/notifications.js"
+    ]
   }
-  
 }
