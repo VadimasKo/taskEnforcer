@@ -1,6 +1,6 @@
 const renderTask = async () => {
-  const { taskList } = await browser.storage.sync.get('taskList')
-  const task = JSON.parse(taskList).find(t => t.isActive)
+  const taskList = await getTaskList()
+  const task = taskList.find(t => t.isActive)
   const taskInfoDiv = document.getElementById('taskInfo')
 
   if (task) {
@@ -29,26 +29,28 @@ const renderTask = async () => {
 }
 
 const disableCurrentTask = async () => {
-  const storageObj = await browser.storage.sync.get('taskList')
-  const taskList = JSON.parse(storageObj.taskList)
+  const taskList = await getTaskList()
 
-  const targetTask = taskList[0]
-  targetTask.isActive = false
-  browser.alarms.clear(targetTask.name)
-  
-  const newList = [...taskList.filter((t, i) => i !== 0), targetTask]
-  
-  await browser.storage.sync.set({ 'taskList': JSON.stringify(newList) })
+  const firstTask = taskList.shift()
+  firstTask.isActive = false
+  browser.alarms.clear(firstTask.name)
+  taskList.push(targetTask)
+
+  await storage.set({ 'taskList': JSON.stringify(taskList) })
 }
 
 document.addEventListener('DOMContentLoaded', renderTask)
 
-document.getElementById("complete").addEventListener("click",async () => {
-  await disableCurrentTask()
-  await renderTask()
-})
+document.getElementById("complete").addEventListener("click",
+  async () => {
+    await disableCurrentTask()
+    await storage.set({ "isBlocked": false })
+    renderTask()
+  }
+)
 
-document.getElementById("settings").addEventListener("click", () => {
+document.getElementById("settings").addEventListener("click",
+  () => {
   const settingsURL = browser.runtime.getURL("options/options.html")
   browser.tabs.create({ url: settingsURL })
 })

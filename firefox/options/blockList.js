@@ -1,27 +1,18 @@
-const bc = new BroadcastChannel('taskEnforcer')
-
-const getBlockList = async () => {
-  const buffer = await browser.storage.sync.get('blockList')
-  return buffer.blockList
-}
-
 const removeBlock = async (index) => {
   const oldList = await getBlockList()
   const blockList = oldList.filter((url, i) => i !== index)
-  await browser.storage.sync.set({ blockList })
-  bc.postMessage('blockListUpdate')
+  await storage.set({ blockList })
   renderBlockList(true)
 }
 
 // Form addNewBlock
 const blockForm = document.getElementById('newBlockForm')
-blockForm.addEventListener('submit', async e => {
+blockForm.addEventListener('submit',async () => {
   const data = new FormData(blockForm)
   const blockList = await getBlockList()
+
   blockList.push(data.get('url'))
-  await browser.storage.sync.set({ blockList })
-  bc.postMessage('blockListUpdate')
-  renderTasks(true)
+  await storage.set({ blockList })
 })
 
 // Render Method

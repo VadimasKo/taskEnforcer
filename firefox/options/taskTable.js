@@ -1,9 +1,3 @@
-//===== Task CRUD update/Edit is missing
-const getTaskList = async () => {
-  const storageObj = await browser.storage.sync.get('taskList')
-  return JSON.parse(storageObj.taskList  || '[]')
-}
-
 const setTask = async (task) => {
   const taskList = await getTaskList()
   taskList.push(task)
@@ -18,19 +12,19 @@ const setTask = async (task) => {
     return h1 < h2 || (h1 === h2 && min1 <= min2 ) ? -1 : + 1
   })
 
-  await browser.storage.sync.set({ taskList: JSON.stringify(taskList) })
+  await storage.set({ taskList: JSON.stringify(taskList) })
 }
 
 const deleteTask = async (index) => {
   const taskList = await getTaskList()
   const newList = taskList.filter((t, i) => i !== index)
-  await browser.storage.sync.set({ taskList: JSON.stringify(newList) })
-  renderTasks(true)
+  await storage.set({ taskList: JSON.stringify(newList) })
+  await renderTasks(true)
 }
 
 //===== HandleForm
 const form = document.getElementById('newTaskForm')
-form.addEventListener('submit', async e => {
+form.addEventListener('submit',async () => {
   const data = new FormData(form)
   const task = {
     name:     data.get('name'),
@@ -44,7 +38,6 @@ form.addEventListener('submit', async e => {
 
 //===== Rendering methods
 const renderTasks = async (isRendered) => {
-
   const taskList = await getTaskList()
   const fragment = new DocumentFragment()
 
@@ -62,7 +55,7 @@ const renderTasks = async (isRendered) => {
   })
 
   const tableBody = document.querySelector("#taskBody")
-  if (isRendered) tableBody.textContent = '' //remove prev render
+  if (isRendered) tableBody.textContent = ''
   tableBody.appendChild(fragment)
 }
 
@@ -85,6 +78,5 @@ const createEditDeleteCell = (index) => {
   tableCell.append(editBtn, deleteBtn)
   return tableCell
 }
-
 
 document.addEventListener('DOMContentLoaded', renderTasks)
