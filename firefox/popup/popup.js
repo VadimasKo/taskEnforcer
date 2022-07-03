@@ -52,6 +52,6 @@ document.getElementById("complete").addEventListener("click",
 
 document.getElementById("settings").addEventListener("click",
   () => {
-  const settingsURL = browser.runtime.getURL("options/options.html")
+  const settingsURL = browser.runtime.getURL("settings/settings.html")
   browser.tabs.create({ url: settingsURL })
 })
