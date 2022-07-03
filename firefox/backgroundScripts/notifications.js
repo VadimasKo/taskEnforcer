@@ -1,36 +1,30 @@
-const getUnixDeadline = (h, min) => {
-  const hoursToUnix = (h) => h * 3600000
-  const minToUnix = (min) => min * 60000
+const getUnixDeadline = (time) => {
+  const date = new Date()
+  isBeforeCurrentTime(time) && date.setDate(date.getDate() + 1)
+  date.setHours(time[0])
+  date.setMinutes(time[1])
+  date.setSeconds(0)
 
-  const currentDate = new Date()
-  const currentUnix = Date.now()
-  const cHours = currentDate.getHours()
-  const cMin = currentDate.getMinutes()
-
-  const cFullDaysUnix = currentUnix - hoursToUnix(cHours) - minToUnix(cMin)
-  
-  const deadline = cFullDaysUnix + hoursToUnix(h) + minToUnix(min)
-
-  return deadline
+  return date.getTime()
 }
 
 const setNextDeadline = async () => {
   const { isBlocked } = await storage.get('isBlocked')
   const taskList = await getTaskList()
-  const task = taskList.find(t => t.isActive)
-
+  const task = taskList[0]
+  
   if (task && !isBlocked) {
-    const [h, min] = task.deadline.split(":")
+    const deadline = convertDeadline(task)
     browser.alarms.create(task.name, { 
-      when: getUnixDeadline(h, min) 
+      when: getUnixDeadline(deadline) 
     })
   }
 }
 
 const deactivateTask = async () => {
   const taskList = await getTaskList()
+
   const firstTask = taskList.shift()
-  firstTask.isActive = false
   taskList.push(firstTask)
 
   await storage.set({ taskList })
@@ -38,10 +32,17 @@ const deactivateTask = async () => {
 
 browser.runtime.onStartup.addListener(setNextDeadline)
 
-browser.storage.onChanged.addListener(async changes => {
-  if (Object.keys(changes).includes('taskList')) {
-    browser.alarms.clearAll()
-    await setNextDeadline()
+browser.storage.onChanged.addListener(async ({ taskList }) => {
+  if (taskList) {
+    if (taskList.newValue === taskList.oldValue) {
+      // Edge case: only 1 task in taskList, 
+      // completed ahead of time 
+      // detected if JSON of new Value == oldValue
+      browser.alarms.clearAll()      
+    } else {
+      await setNextDeadline()
+      browser.alarms.clearAll()
+    }
   }
 })
 

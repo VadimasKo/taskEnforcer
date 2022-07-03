@@ -25,29 +25,19 @@ browser.runtime.onStartup.addListener(async () => {
   }
 })
 
-storage.onChanged.addListener(async changes => {
-  console.log('changes', changes)
-  const hasBlockChanged = Object.keys(changes).includes('isBlocked')
-  const hasListChanged = Object.keys(changes).includes('blockList')
-  
-  let isBlocked
-  let blockList
-
-  if (!hasListChanged && !hasBlockChanged){
-    return
-
-  } else if (hasListChanged && hasBlockChanged) {
-    isBlocked = changes.isBLocked.newValue
-    blockList = changes.blockList.newValue
-
-  } else if (hasListChanged) {
+storage.onChanged.addListener(async ({ isBlocked, blockList }) => {
+  if (isBlocked && blockList) {
+    isBlocked = isBlocked.newValue
+    blockList = blockList.newValue
+  } else if (isBlocked && !blockList) {
+    isBlocked = isBlocked.newValue
+    blockList = await getBlockList() 
+  } else if (!isBlocked && blockList) {
     isBlocked = await storage.get('isBLocked').isBLocked
-    blockList = changes.blockList.newValue
-
-  } else if (hasBlockChanged) {
-    isBlocked = changes.isBlocked.newValue
-    blockList = await getBlockList()
-    
+    blockList = blockList.newValue
+  } else {
+    //if includes no relevant change
+    return
   }
 
   if (isBlocked) {
