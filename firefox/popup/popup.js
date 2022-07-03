@@ -1,9 +1,12 @@
 const renderTask = async () => {
   const taskList = await getTaskList()
-  const task = taskList.find(t => t.isActive)
-  const taskInfoDiv = document.getElementById('taskInfo')
+  const { isBlocked } = await storage.get('isBlocked')
+  const task = taskList[0]
 
-  if (task) {
+  const isToday = task && !isBeforeCurrentTime(convertDeadline(task))
+  const taskInfoDiv = document.getElementById('taskInfo')
+    
+  if (isToday || !isToday && isBlocked) {
     const infoFragment = new DocumentFragment()
     
     const nameH2 = document.createElement('h2')
@@ -32,9 +35,7 @@ const disableCurrentTask = async () => {
   const taskList = await getTaskList()
 
   const firstTask = taskList.shift()
-  firstTask.isActive = false
-  browser.alarms.clear(firstTask.name)
-  taskList.push(targetTask)
+  taskList.push(firstTask)
 
   await storage.set({ 'taskList': JSON.stringify(taskList) })
 }
@@ -45,7 +46,7 @@ document.getElementById("complete").addEventListener("click",
   async () => {
     await disableCurrentTask()
     await storage.set({ "isBlocked": false })
-    renderTask()
+    await renderTask()
   }
 )
 

@@ -1,18 +1,10 @@
 const setTask = async (task) => {
   const taskList = await getTaskList()
+
   taskList.push(task)
+  const sortedList = JSON.stringify(sortTasks(taskList))
 
-  taskList.sort((task1, task2) => {
-    if (task1.isActive && !task2.isActive) return -1
-    if (!task1.isActive && task2.isActive) return +1
-
-    const [h1, min1] = task1.deadline.split(':').map(val => parseInt(val))
-    const [h2, min2] = task2.deadline.split(':').map(val => parseInt(val))
-
-    return h1 < h2 || (h1 === h2 && min1 <= min2 ) ? -1 : + 1
-  })
-
-  await storage.set({ taskList: JSON.stringify(taskList) })
+  await storage.set({ taskList: sortedList })
 }
 
 const deleteTask = async (index) => {
@@ -30,7 +22,6 @@ form.addEventListener('submit',async () => {
     name:     data.get('name'),
     deadline: data.get('deadline'),
     duration: data.get('duration'),
-    isActive: true,
   }
   await setTask(task)
   renderTasks(true)
