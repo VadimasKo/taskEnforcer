@@ -30,6 +30,13 @@ const deactivateTask = async () => {
   await storage.set({ taskList })
 }
 
+//sort tasks based on current time
+browser.runtime.onStartup.addListener(async () => {
+  const oldList = await getTaskList()
+  const taskList = JSON.stringify(sortTasks(oldList))
+  await storage.set({ taskList })
+})
+
 browser.runtime.onStartup.addListener(setNextDeadline)
 
 browser.storage.onChanged.addListener(async ({ taskList }) => {
