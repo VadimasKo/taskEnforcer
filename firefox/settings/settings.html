@@ -12,16 +12,19 @@
       <table>
         <caption><h2>Task Table</h2></caption>
         <thead>
-          <tr>
-            <th scope="col">Task Name</th> <!-- ex Do 20 pushups -->
+          <tr> 
+            <th scope="col">#</th> 
+            <th scope="col">Task Name</th> 
             <th scope="col">Deadline</th> 
             <th scope="col">Task Duration (min)</th>
+            <th scope="col">Repeatable</th>
             <th scope="col">Edit / Delete</th>
           </tr>
         </thead>
         <tbody id="taskBody"></tbody>
         <tfoot>
           <tr>
+            <td></td>
             <form id='newTaskForm'>
               <td><input
                 type="text"
@@ -39,6 +42,11 @@
                 type="number"
                 placeholder="5"
                 value="5"
+              /></td>
+              <td><input
+                name="isRepeatable"
+                type="checkbox"
+                checked
               /></td>
               <td><button type="submit">add New</button></td>
             </form>

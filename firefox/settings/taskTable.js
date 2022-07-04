@@ -19,9 +19,10 @@ const form = document.getElementById('newTaskForm')
 form.addEventListener('submit',async () => {
   const data = new FormData(form)
   const task = {
-    name:     data.get('name'),
-    deadline: data.get('deadline'),
-    duration: data.get('duration'),
+    name:         data.get('name'),
+    deadline:     data.get('deadline'),
+    duration:     data.get('duration'),
+    isRepeatable: data.get('isRepeatable')
   }
   await setTask(task)
   renderTasks(true)
@@ -34,6 +35,12 @@ const renderTasks = async (isRendered) => {
 
   taskList.map((task, index) => {
     const tableRow = document.createElement('tr')
+    
+    const indexRow = document.createElement('th')
+    indexRow.scope = 'row'
+    indexRow.textContent = index
+
+    tableRow.append(indexRow)
 
     Object.values(task).forEach(value => {
       const tableCell = document.createElement('td')

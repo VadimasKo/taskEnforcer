@@ -35,7 +35,9 @@ const disableCurrentTask = async () => {
   const taskList = await getTaskList()
 
   const firstTask = taskList.shift()
-  taskList.push(firstTask)
+  if (firstTask.isRepeatable) {
+    taskList.push(firstTask)
+  }
 
   await storage.set({ 'taskList': JSON.stringify(taskList) })
 }
