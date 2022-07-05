@@ -7,10 +7,34 @@
   </head>
  
   <body>
-    <nav>
+    <nav class="isClosed">
+      <div id="iconWrapper">
+        <img
+          id="navIcon"
+          src="../icons/ei-navicon.svg"
+          height="50"
+          width="50"
+        />
+      </div>
+
+      <div id="taskOption" class="option isSelected">
+        <img
+          src="../icons/ei-calendar.svg"
+          height="40"
+          width="40"
+        />
+      </div>
+      
+      <div id='blockOption' class="option">
+        <img
+          src="../icons/ei-lock.svg"
+          height="40"
+          width="40"
+        />
+      </div>
     </nav>
   
-    <section>
+    <section id="taskList">
       <table>
         <caption><h2>Task Table</h2></caption>
         <thead>
@@ -57,7 +81,7 @@
       </table>
     </section>
   
-    <section>
+    <section id="blockList" class="isHidden">
       <h2>Blocklist</h2>
       <ul id="blockList"></ul>
       <form id="newBlockForm">
@@ -67,6 +91,7 @@
     </section>
 
     <script src="../common/index.js"></script>
+    <script src="scripts/navigation.js"></script>
     <script src="scripts/taskTable.js"></script>
     <script src="scripts/blockList.js"></script>
   </body>
