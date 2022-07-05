@@ -1,0 +1,29 @@
+body {
+  width: 270px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; 
+}
+
+#taskControls {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#settings {
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+  transition: all .2s ease-in-out;
+}
+
+#settings:hover {
+  transform: scale(1.1); 
+}

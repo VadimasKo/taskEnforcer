@@ -12,8 +12,8 @@ const renderTask = async () => {
     const nameH2 = document.createElement('h2')
     nameH2.textContent = task.name
 
-    const deadlineP = document.createElement('small')
-    deadlineP.textContent = "Task deadline: " + task.deadline
+    const deadlineP = document.createElement('p')
+    deadlineP.textContent = "Deadline " + task.deadline
 
     infoFragment.append(nameH2, deadlineP)
 
