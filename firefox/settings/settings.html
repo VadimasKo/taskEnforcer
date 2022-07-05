@@ -37,7 +37,7 @@
     <section id="taskList">
       <div class="taskListWrapper">
         <table>
-          <caption><h2>Task Table</h2></caption>
+          <caption><h2>Task List</h2></caption>
           <thead>
             <tr> 
               <th scope="col">#</th> 
@@ -51,34 +51,40 @@
           <tbody id="taskBody"></tbody>
           <tfoot>
             <tr>
-              <td>
-                ...
-              </td>
               <form id='newTaskForm'>
-                <td><input
-                  type="text"
-                  name="name"
-                  placeholder="new Task Name" 
-                  value="do 20 pushups"
-                /></td>
-                <td><input
-                  type="time"
-                  name="deadline"
-                  value='15:30'
-                /></td>
-                <td><input
-                  name="duration"
-                  type="number"
-                  placeholder="5"
-                  value="5"
-                /></td>
-                <td><input
-                  name="isRepeatable"
-                  type="checkbox"
-                  checked
-                /></td>
+                <td>...</td>
                 <td>
-                  <button type="submit">Add new</button>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="new Task Name" 
+                  />
+                </td>
+                <td>
+                  <input
+                    type="time"
+                    name="deadline"
+                    value='15:30'
+                  />
+                </td>
+                <td>
+                  <input
+                    name="duration"
+                    type="number"
+                    value="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    name="isRepeatable"
+                    type="checkbox"
+                    checked
+                  />
+                </td>
+                <td>
+                  <button type="submit">
+                    Add new
+                  </button>
                 </td>
               </form>
             </tr>
@@ -88,12 +94,30 @@
     </section>
   
     <section id="blockList" class="isHidden">
-      <h2>Blocklist</h2>
-      <ul id="blockList"></ul>
-      <form id="newBlockForm">
-        <input type="text" name='url'/>
-        <button id="submit">add new website</button>
-      </form>
+      <div class="blockListWrapper">
+        <table>
+          <caption><h2>Block List</h2></caption>
+          <thead>
+            <tr> 
+              <th scope="col">#</th> 
+              <th scope="col">Block patern</th> 
+              <th scope="col">. . .</th>
+            </tr>
+          </thead>
+          <tbody id="blockBody"></tbody>
+          <tfoot>
+            <tr>
+              <form id="newBlockForm">
+                <td>...</td>
+                <td><input type="text" name='url'/></td>
+                <td>
+                  <button id="submit">add new</button>
+                </td>
+              </form>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </section>
 
     <script src="../common/index.js"></script>

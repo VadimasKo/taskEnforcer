@@ -16,26 +16,39 @@ blockForm.addEventListener('submit',async () => {
 })
 
 // Render Method
+const createDeleteBtn = (index) => {
+  const deleteBtn = document.createElement('button')
+  deleteBtn.className = 'deleteBtn'
+  deleteBtn.textContent = 'Delete'
+  deleteBtn.onclick = () => removeBlock(index)
+
+  return deleteBtn
+}
+
 const renderBlockList = async (isRendered) => {
   const blockList = await getBlockList()
-  const listFragment = new DocumentFragment()
+  const tableFragment = new DocumentFragment()
   
   blockList.forEach((url, index) => {
-    const blockItem = document.createElement('li')
-    blockItem.textContent = url
-    
-    const deleteBtn = document.createElement('button')
-    deleteBtn.className = 'deleteBtn'
-    deleteBtn.textContent = 'Delete'
-    deleteBtn.onclick = () => removeBlock(index)
-    
-    blockItem.append(deleteBtn)
-    listFragment.append(blockItem)    
+    const blockRow = document.createElement('tr')
+  
+    const indexCell = document.createElement('th')
+    indexCell.scope = 'row'
+    indexCell.textContent = index
+
+    const urlCell = document.createElement('td')
+    urlCell.textContent = url
+
+    const deleteCell = document.createElement('td')
+    deleteCell.append(createDeleteBtn(index))
+
+    blockRow.append(indexCell, urlCell, deleteCell)
+    tableFragment.append(blockRow)    
   })
 
-  const htmlList = document.querySelector("#blockList")
+  const htmlList = document.querySelector("#blockBody")
   if (isRendered) htmlList.textContent = ''
-  htmlList.appendChild(listFragment)
+  htmlList.appendChild(tableFragment)
 }
 
 document.addEventListener('DOMContentLoaded', renderBlockList)
