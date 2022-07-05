@@ -20,6 +20,11 @@ section {
   margin-top: 2rem;
 }
 
+caption {
+  text-align: start;
+  margin-bottom: 2rem;
+}
+
 .isHidden {
   display: none;
 }
