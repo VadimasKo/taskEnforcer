@@ -48,7 +48,7 @@ const renderTasks = async (isRendered) => {
       tableRow.append(tableCell)
     })
 
-    tableRow.append(createEditDeleteCell(index))
+    tableRow.append(createDeleteCell(index))
     fragment.append(tableRow)
   })
 
@@ -58,7 +58,7 @@ const renderTasks = async (isRendered) => {
 }
 
 // Is there a shorthand method?
-const createEditDeleteCell = (index) => {
+const createDeleteCell = (index) => {
   const tableCell = document.createElement('td')
 
   const deleteBtn = document.createElement('button')
@@ -67,13 +67,7 @@ const createEditDeleteCell = (index) => {
   deleteBtn.textContent = 'Delete'
   deleteBtn.onclick = () => deleteTask(index)
 
-  const editBtn = document.createElement('button')
-  editBtn.id = index
-  editBtn.disabled = true
-  editBtn.className = 'editBtn'
-  editBtn.textContent = 'Edit'
-
-  tableCell.append(editBtn, deleteBtn)
+  tableCell.append(deleteBtn)
   return tableCell
 }
 
