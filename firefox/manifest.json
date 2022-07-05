@@ -17,11 +17,10 @@
   ],
 
   "icons": {
-    "48": "icons/border-48.png"
+    "48": "icons/check.png"
   },
 
   "browser_action": {
-    "default_icon": "icons/border-48.png",
     "default_title": "TaskEnforcer",
     "default_popup": "popup/popup.html"
   },
