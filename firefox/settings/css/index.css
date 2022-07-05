@@ -14,6 +14,12 @@ body {
   column-gap: 4rem;
 }
 
+section {
+  height: 100vh;
+  width: calc(100% - 200px);
+  margin-top: 2rem;
+}
+
 .isHidden {
   display: none;
 }

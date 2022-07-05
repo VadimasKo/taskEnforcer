@@ -35,50 +35,56 @@
     </nav>
   
     <section id="taskList">
-      <table>
-        <caption><h2>Task Table</h2></caption>
-        <thead>
-          <tr> 
-            <th scope="col">#</th> 
-            <th scope="col">Task Name</th> 
-            <th scope="col">Deadline</th> 
-            <th scope="col">Task Duration (min)</th>
-            <th scope="col">Repeatable</th>
-            <th scope="col">Edit / Delete</th>
-          </tr>
-        </thead>
-        <tbody id="taskBody"></tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-            <form id='newTaskForm'>
-              <td><input
-                type="text"
-                name="name"
-                placeholder="new Task Name" 
-                value="do 20 pushups"
-              /></td>
-              <td><input
-                type="time"
-                name="deadline"
-                value='15:30'
-              /></td>
-              <td><input
-                name="duration"
-                type="number"
-                placeholder="5"
-                value="5"
-              /></td>
-              <td><input
-                name="isRepeatable"
-                type="checkbox"
-                checked
-              /></td>
-              <td><button type="submit">add New</button></td>
-            </form>
-          </tr>
-        </tfoot>
-      </table>
+      <div class="taskListWrapper">
+        <table>
+          <caption><h2>Task Table</h2></caption>
+          <thead>
+            <tr> 
+              <th scope="col">#</th> 
+              <th scope="col">Task Name</th> 
+              <th scope="col">Deadline</th> 
+              <th scope="col">Task Duration (min)</th>
+              <th scope="col">Repeatable</th>
+              <th scope="col">. . .</th>
+            </tr>
+          </thead>
+          <tbody id="taskBody"></tbody>
+          <tfoot>
+            <tr>
+              <td>
+                ...
+              </td>
+              <form id='newTaskForm'>
+                <td><input
+                  type="text"
+                  name="name"
+                  placeholder="new Task Name" 
+                  value="do 20 pushups"
+                /></td>
+                <td><input
+                  type="time"
+                  name="deadline"
+                  value='15:30'
+                /></td>
+                <td><input
+                  name="duration"
+                  type="number"
+                  placeholder="5"
+                  value="5"
+                /></td>
+                <td><input
+                  name="isRepeatable"
+                  type="checkbox"
+                  checked
+                /></td>
+                <td>
+                  <button type="submit">Add new</button>
+                </td>
+              </form>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </section>
   
     <section id="blockList" class="isHidden">
